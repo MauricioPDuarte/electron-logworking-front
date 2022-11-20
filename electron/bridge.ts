@@ -13,6 +13,16 @@ export const api = {
     ipcRenderer.send('message', message)
   },
 
+  getMessage: async () => {
+    return await ipcRenderer.invoke('getMessage');
+  },
+
+  getSystemIdleTime: async () => {
+    return await ipcRenderer.invoke('getSystemIdleTime');
+  },
+
+
+
   /**
    * Provide an easier way to listen to events
    */

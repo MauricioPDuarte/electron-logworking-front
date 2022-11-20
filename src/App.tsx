@@ -1,12 +1,17 @@
+import "reflect-metadata"
+
 import { GlobalStyle } from './styles/GlobalStyle'
 
-import { Greetings } from './components/Greetings'
+import { SignInPage } from './pages/SignIn'
+import AppProvider from './hooks'
 
 export function App() {
   return (
     <>
       <GlobalStyle />
-      <Greetings />
+      <AppProvider>
+        <SignInPage />
+      </AppProvider>
     </>
   )
 }
