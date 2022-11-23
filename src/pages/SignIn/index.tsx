@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 import { useAuth } from "../../hooks/auth";
 import { Log } from "../../models/Log";
-import { Container, Text } from "./styles";
+import { Container,Help, Form, Header, Footer, Divider, Title, Label, Input,StatusConnection, StatusCircle, StatusText, Subtitle, Description   } from "./styles";
 
 import { v4 as uuidv4 } from 'uuid';
 import api from "../../services/api";
@@ -16,6 +16,8 @@ export function SignInPage() {
   // eslint-disable-next-line no-undef
   const [intervalSync, setIntervalSync] = useState<NodeJS.Timer | null>(null);
 
+  const [inputConnection, setInputConnection] = useState('');
+ 
 
   useEffect(() => {
     if(user != null) {
@@ -96,12 +98,52 @@ export function SignInPage() {
     setIntervalSync(interval);
   } 
   
+    function handleSignIn() {
+      if(user != null) {
+        signOut();
+      } else {
+        console.log(inputConnection);
+        signIn(inputConnection);
+       
+      }
+     
+    }
+
+  
 
     return (
       <Container>
-        <Text>LoginPag - { user != null ? 'Logado' : 'Desconectado'}</Text>
-        <Button onClick={() => signIn('893847cf-6697-423c-abf3-37f7b0c645ee')}>Logar</Button>
-        <Button onClick={() => signOut()}>Deslogar</Button>
+
+        <Header>
+          <Title>LW</Title>
+          <Divider />
+        </Header>
+       
+
+        <Form>
+          <Label>Código conexão</Label>
+          <Input onChange={(e) => setInputConnection(e.target.value)} value={inputConnection}/>
+        </Form>
+   
+        
+        <Help>
+          <Subtitle>Ei, que código é esse?</Subtitle>
+          <Description>Esse código é unico de cada plataforma, solicite ao administrador. O código é utilizado para envio dos logs coletados nesta maquina para a plataforma em nuvem.</Description>
+        </Help>
+
+        <Footer>
+          <StatusConnection>
+            <StatusCircle connected={user != null} />
+            <StatusText>{user != null ? 'Conexão estabelecida' : 'Aguardando conexão'}</StatusText>
+          </StatusConnection>
+       
+          <Button onClick={() => handleSignIn()}>{user != null ? 'Desconectar' : 'Conectar'}</Button>
+        </Footer>
+        
+ 
+
+      
+  
       </Container>
     )
   }

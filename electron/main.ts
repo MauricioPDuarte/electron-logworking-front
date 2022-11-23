@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain, powerMonitor } from 'electron'
+import { app, BrowserWindow, ipcMain, Menu, powerMonitor, Tray } from 'electron'
 
 
 let mainWindow: BrowserWindow | null
@@ -15,9 +15,10 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     // icon: path.join(assetsPath, 'assets', 'icon.png'),
     width: 600,
-    height: 400,
+    height: 360,
     resizable: false,
     fullscreen: false,
+    title: 'LogWorking',
     backgroundColor: '#FFFFFF',
     webPreferences: {
       nodeIntegration: false,
@@ -56,9 +57,19 @@ app.on('ready', createWindow)
   .whenReady()
   .then(registerListeners)
   .then(registerHandles)
+  .then(createTray)
   .catch(e => console.error(e))
 
   
+let tray = null
+function createTray() {
+  tray = new Tray('./assets/logo.png');
+  const contextMenu = Menu.buildFromTemplate([
+   
+  ])
+  tray.setToolTip('LogWorking')
+  tray.setContextMenu(contextMenu)
+}
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

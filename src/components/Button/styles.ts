@@ -9,11 +9,11 @@ export const Container = styled.button`
   justify-content: center;
 
   background: #8257e6;
-  border-radius: 8px;
+  border-radius: 5px;
   border: 0;
 
   color: #FFF;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: bold;
 
   cursor: pointer;

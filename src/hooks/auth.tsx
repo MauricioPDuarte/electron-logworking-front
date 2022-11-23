@@ -30,7 +30,7 @@ export const AuthProvider: FC = ({ children }) => {
     return {} as AuthState;
   });
 
-  const signIn = useCallback(async ({ connectionId }) => {
+  const signIn = useCallback(async (connectionId: string ) => {
     const response = await api.post('sessions_connection_id', { connectionId });
 
     console.log(response);
