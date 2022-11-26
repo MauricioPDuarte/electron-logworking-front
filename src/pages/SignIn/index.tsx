@@ -82,7 +82,7 @@ export function SignInPage() {
 
       if (logs.length === 0) return null;
 
-      api.post('sync/push', {logs})
+      api.post('logs/push', {logs})
       .then(() => {
         const logsString = window.sessionStorage.getItem('logs');
         const logs = logsString ? JSON.parse(logsString) as Log[] : [];
